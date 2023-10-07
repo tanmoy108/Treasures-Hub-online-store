@@ -31,4 +31,18 @@ export function fetchFilterProduct(filterSelect, sortSelect, pagination) {
   });
 }
 
+export function fetchAllCategories() {
+  return new Promise(async (resolve) => {
+    const response = await fetch('http://localhost:8000/categories')
+    const data = await response.json()
+    resolve({ data })
+  });
+}
+export function fetchAllBrands() {
+  return new Promise(async (resolve) => {
+    const response = await fetch('http://localhost:8000/brands')
+    const data = await response.json()
+    resolve({ data })
+  });
+}
 
