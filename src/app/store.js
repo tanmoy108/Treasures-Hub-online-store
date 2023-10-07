@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
 import NavbarReducer from '../features/navbar/NavbarSlice';
 import ProductReducer from '../features/productList/ProductSlice';
+import UserReducer from '../features/auth/AuthSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     toggle: NavbarReducer,
     products: ProductReducer,
+    users:UserReducer,
   },
 });

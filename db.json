@@ -1840,7 +1840,7 @@
       ]
     }
   ],
-  "categories":[
+  "categories": [
     {
       "value": "smartphones",
       "label": "smartphones",
@@ -1942,7 +1942,7 @@
       "checked": false
     }
   ],
-  "brands":[
+  "brands": [
     {
       "value": "Apple",
       "label": "Apple",
@@ -2332,6 +2332,13 @@
       "value": "YIOSI",
       "label": "YIOSI",
       "checked": false
+    }
+  ],
+  "users": [
+    {
+      "email": "tanmoy@gmail.com",
+      "password": "abcABC123",
+      "id": 1
     }
   ]
 }

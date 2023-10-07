@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import Checkout from './pages/Checkout';
 import SpecificPage from './pages/SpecificPage';
+import Protected from './features/auth/component/Protected';
 
 const router = createBrowserRouter([
   {
@@ -25,10 +26,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/checkout",
-    element: <Checkout/>,
+    element: <Protected><Checkout/></Protected>,
   },
   {
-    path: "//specificProduct",
+    path: "/specificProduct/:id",
     element: <SpecificPage/>,
   },
 ]);
