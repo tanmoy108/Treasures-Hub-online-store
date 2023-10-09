@@ -27,7 +27,7 @@ export function fetchFilterProduct(filterSelect, sortSelect, pagination) {
     console.log(response)
     const data = await response.json()
     const totalitem = await response.headers.get('X-Total-Count')
-    resolve({ data:{products:data,totalItems:+totalitem} })
+    resolve({ data: { products: data, totalItems: +totalitem } })
   });
 }
 
@@ -47,7 +47,7 @@ export function fetchAllBrands() {
 }
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/products/'+id)
+    const response = await fetch('http://localhost:8000/products/' + id)
     const data = await response.json()
     resolve({ data })
   });

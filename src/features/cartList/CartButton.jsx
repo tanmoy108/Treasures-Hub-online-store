@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { selectCart } from './CartLIstSlice'
 
-const CartButton = () => {
+const CartButton = ({ HandleOrder }) => {
     const cartProducts = useSelector(selectCart)
     const totalPrice = cartProducts.reduce((acc, item) => item.price * item.quantity + acc, 0)
     const totalQuantity = cartProducts.reduce((total, item) => item.quantity + total, 0)
@@ -23,12 +23,13 @@ const CartButton = () => {
                         <p>{totalQuantity}</p>
                     </div>
                     <div className="mt-6">
-                        <Link
-                            to="/checkout"
-                            className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                        >
-                            Pay and Order
-                        </Link>
+                        {!HandleOrder ?
+                            <Link to="/checkout"
+                                className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+                                CheckOut</Link> :
+                            <div onClick={HandleOrder}
+                                className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+                                Pay and Order</div>}
                     </div>
                     <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>

@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { GetCart, PostCart, PatchCart, DeleteCart } from './CartListApi';
+import { GetCart, PostCart, PatchCart, DeleteCart, ClearCart } from './CartListApi';
 
 const initialState = {
   status: 'idle',
-  cart: [],
+  cart: []
 };
 export const CartPostAsync = createAsyncThunk(
   'cart/PostCart',
@@ -35,6 +35,14 @@ export const CartDeleteAsync = createAsyncThunk(
     return response.data;
   }
 );
+export const CartClearAsync = createAsyncThunk(
+  'cart/ClearCart',
+  async (id) => {
+    console.log(id);
+    const response = await ClearCart(id);
+    return response.data;
+  }
+);
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -62,12 +70,12 @@ export const cartSlice = createSlice({
         state.status = 'idle';
         state.cart = action.payload;
       })
-      .addCase(CartPatchAsync .pending, (state) => {
+      .addCase(CartPatchAsync.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(CartPatchAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-       const index =  state.cart.findIndex((item)=>item.id === action.payload.id)
+        const index = state.cart.findIndex((item) => item.id === action.payload.id)
         state.cart[index] = action.payload;
       })
       .addCase(CartDeleteAsync.pending, (state) => {
@@ -75,8 +83,15 @@ export const cartSlice = createSlice({
       })
       .addCase(CartDeleteAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-       const index =  state.cart.findIndex((item)=>item.id === action.payload.id)
-        state.cart.splice(index,1)
+        const index = state.cart.findIndex((item) => item.id === action.payload.id)
+        state.cart.splice(index, 1)
+      })
+      .addCase(CartClearAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(CartClearAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.cart = []
       })
   },
 });

@@ -41,15 +41,15 @@ const Navbar = ({ children }) => {
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
-                   <Link to="/">
-                   <div className="flex-shrink-0">
-                      <img
-                        className="h-8 w-8"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="Your Company"
-                      />
-                    </div>
-                   </Link>
+                    <Link to="/">
+                      <div className="flex-shrink-0">
+                        <img
+                          className="h-8 w-8"
+                          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                          alt="Your Company"
+                        />
+                      </div>
+                    </Link>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
@@ -78,7 +78,7 @@ const Navbar = ({ children }) => {
                           className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                           aria-hidden="true"
                         />
-                        <span className="-ml-2 text-sm bg-red-600 px-2 mb-2 rounded-lg font-medium text-white">{cartProducts.length ? cartProducts.length:''}</span>
+                        <span className="-ml-2 text-sm bg-red-600 px-2 mb-2 rounded-lg font-medium text-white">{cartProducts.length ? cartProducts.length : ''}</span>
                       </button>
 
 
@@ -167,7 +167,7 @@ const Navbar = ({ children }) => {
                         className="h-7 w-7 text-gray-400 group-hover:text-gray-500"
                         aria-hidden="true"
                       />
-                      <span className="absolute  ml-3 text-sm bg-red-600 px-2 rounded-lg font-medium text-white">{cartProducts.length ? cartProducts.length:''}</span>
+                      <span className="absolute  ml-3 text-sm bg-red-600 px-2 rounded-lg font-medium text-white">{cartProducts.length ? cartProducts.length : ''}</span>
                     </button>
                   </div>
                   <div className="mt-3 space-y-1 px-2">

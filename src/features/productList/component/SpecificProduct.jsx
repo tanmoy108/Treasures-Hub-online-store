@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectSpecificProduct, specificProductAsync } from '../ProductSlice'
 import { selectUser } from '../../auth/AuthSlice'
 import { CartPostAsync } from '../../cartList/CartLIstSlice'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 
 const colors = [

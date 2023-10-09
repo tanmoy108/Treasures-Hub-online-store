@@ -7,7 +7,7 @@ const initialState = {
   totalCount: 0,
   categories: [],
   brands: [],
-  specificProduct:null
+  specificProduct: null
 };
 export const productAsync = createAsyncThunk(
   'product/fetchAllProduct',
@@ -38,7 +38,7 @@ export const brandAsync = createAsyncThunk(
     return response.data;
   }
 );
-export const specificProductAsync= createAsyncThunk(
+export const specificProductAsync = createAsyncThunk(
   'product/fetchProductById',
   async (id) => {
     const response = await fetchProductById(id);

@@ -13,27 +13,32 @@ import Protected from './features/auth/component/Protected';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './features/auth/AuthSlice';
 import { CartGetAsync } from './features/cartList/CartLIstSlice';
+import Order from './features/order/Order';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home/>,
+    element: <Home />,
   },
   {
     path: "/login",
-    element: <LoginPage/>,
+    element: <LoginPage />,
   },
   {
     path: "/signup",
-    element: <SignupPage/>,
+    element: <SignupPage />,
   },
   {
     path: "/checkout",
-    element: <Protected><Checkout/></Protected>,
+    element: <Protected><Checkout /></Protected>,
   },
   {
     path: "/specificProduct/:id",
-    element: <SpecificPage/>,
+    element: <SpecificPage />,
+  },
+  {
+    path: "/order/:id",
+    element: <Protected><Order /></Protected>,
   },
 ]);
 
@@ -41,12 +46,12 @@ function App() {
   const userData = useSelector(selectUser);
   const dispatch = useDispatch();
   useEffect(() => {
-    if(userData) dispatch(CartGetAsync(userData.id))
+    if (userData) dispatch(CartGetAsync(userData.id))
   }, [userData])
 
   return (
     <div className="App">
-       <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </div>
   );
 }

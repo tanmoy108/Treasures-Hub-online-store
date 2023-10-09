@@ -15,7 +15,7 @@ export default function Signup() {
   } = useForm()
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      {userData?<p>{userData.email}</p>:null}
+      {userData ? <p>{userData.email}</p> : null}
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <Link to="/">
           <img
@@ -30,7 +30,7 @@ export default function Signup() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form noValidate className="space-y-6" onSubmit={handleSubmit((data) =>{dispatch(userAsync({email:data.email,password:data.password}))})}>
+        <form noValidate className="space-y-6" onSubmit={handleSubmit((data) => { dispatch(userAsync({ email: data.email, password: data.password, address: [] })) })}>
           <div>
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
               Email address

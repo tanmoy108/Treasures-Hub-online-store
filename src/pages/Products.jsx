@@ -4,7 +4,7 @@ import ProductList from '../features/productList/component/Products'
 const Products = () => {
   return (
     <div>
-    <ProductList/>    
+      <ProductList />
     </div>
   )
 }

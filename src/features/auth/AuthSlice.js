@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchUsers,PostUsers } from './AuthApi';
+import { fetchUsers, PatchUsers, PostUsers } from './AuthApi';
 
 const initialState = {
-  user:null,
+  user: null,
   status: 'idle',
-  error:null
+  error: null
 };
 export const userAsync = createAsyncThunk(
   'auth/PostUsers',
@@ -17,6 +17,13 @@ export const getUserAsync = createAsyncThunk(
   'auth/fetchUsers',
   async (userData) => {
     const response = await fetchUsers(userData);
+    return response.data;
+  }
+);
+export const patchUserAsync = createAsyncThunk(
+  'auth/PatchUsers',
+  async (userData) => {
+    const response = await PatchUsers(userData);
     return response.data;
   }
 );
@@ -48,7 +55,16 @@ export const userSlice = createSlice({
       .addCase(getUserAsync.rejected, (state, action) => {
         state.status = 'error';
         state.error = action.error;
-      });
+      })
+      .addCase(patchUserAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(patchUserAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        console.log(state.user)
+        state.user = action.payload;
+      })
+
   },
 });
 
