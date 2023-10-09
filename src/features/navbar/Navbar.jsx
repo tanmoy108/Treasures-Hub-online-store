@@ -2,9 +2,10 @@ import React, { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon, ShoppingCartIcon } from '@heroicons/react/24/outline'
 import { setToggle } from './NavbarSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom';
+import { selectCart } from '../cartList/CartLIstSlice';
 const user = {
   name: 'Tom Cook',
   email: 'tom@example.com',
@@ -30,6 +31,7 @@ function classNames(...classes) {
 
 const Navbar = ({ children }) => {
   const dispatch = useDispatch();
+  const cartProducts = useSelector(selectCart)
   return (
     <>
       <div className="min-h-full">
@@ -76,7 +78,7 @@ const Navbar = ({ children }) => {
                           className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                           aria-hidden="true"
                         />
-                        <span className="-ml-2 text-sm bg-red-600 px-2 mb-2 rounded-lg font-medium text-white">5</span>
+                        <span className="-ml-2 text-sm bg-red-600 px-2 mb-2 rounded-lg font-medium text-white">{cartProducts.length ? cartProducts.length:''}</span>
                       </button>
 
 
@@ -102,15 +104,15 @@ const Navbar = ({ children }) => {
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
-                                  <a
-                                    href={item.href}
+                                  <Link
+                                    to="/login"
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
                                     )}
                                   >
                                     {item.name}
-                                  </a>
+                                  </Link>
                                 )}
                               </Menu.Item>
                             ))}
@@ -165,7 +167,7 @@ const Navbar = ({ children }) => {
                         className="h-7 w-7 text-gray-400 group-hover:text-gray-500"
                         aria-hidden="true"
                       />
-                      <span className="absolute  ml-3 text-sm bg-red-600 px-2 rounded-lg font-medium text-white">5</span>
+                      <span className="absolute  ml-3 text-sm bg-red-600 px-2 rounded-lg font-medium text-white">{cartProducts.length ? cartProducts.length:''}</span>
                     </button>
                   </div>
                   <div className="mt-3 space-y-1 px-2">

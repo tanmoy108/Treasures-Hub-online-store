@@ -1,7 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Navbar from '../features/navbar/Navbar';
 import CartBox from '../features/cartList/CartBox'
 import CartButton from '../features/cartList/CartButton'
+import { useSelector } from 'react-redux';
+import { selectCart } from '../features/cartList/CartLIstSlice';
+import CartList from '../features/cartList/CartList';
 
 const products = [
     {
@@ -50,7 +53,10 @@ const addresses = [
     },
 ];
 function Checkout() {
+    const cartProducts = useSelector(selectCart)
     return (
+       <>
+       {!cartProducts.length && <Navigate to="/" replace={true}></Navigate>}
         <Navbar>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
@@ -342,6 +348,8 @@ function Checkout() {
                 </div>
             </div>
         </Navbar>
+        <CartList />
+       </>
 
     );
 }

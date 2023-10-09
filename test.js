@@ -1853,3 +1853,7 @@ console.log(f[d]=e)
 
 Array.from({length:5}).map(e=>(  
   console.log(1)))
+
+  let aaa =["dfdf","ff","dfdsf"]
+  aaa.splice(2,1)
+  aaa

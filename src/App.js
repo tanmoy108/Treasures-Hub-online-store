@@ -33,7 +33,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/specificProduct/:id",
-    element: <Protected><SpecificPage/></Protected>,
+    element: <SpecificPage/>,
   },
 ]);
 
