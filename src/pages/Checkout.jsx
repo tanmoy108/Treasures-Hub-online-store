@@ -1,4 +1,4 @@
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import Navbar from '../features/navbar/Navbar';
 import CartBox from '../features/cartList/CartBox';
 import CartButton from '../features/cartList/CartButton';
@@ -16,14 +16,12 @@ function Checkout() {
     const orderData = useSelector(selectOrder);
     console.log(orderData)
     const dispatch = useDispatch();
-    const navigate = useNavigate()
     const [selectAddress, setSelectAddress] = useState(null);
     const [payment, setPayment] = useState("card");
     const {
         register,
         handleSubmit,
         reset,
-        formState: { errors },
     } = useForm()
 
     const totalPrice = cartProducts.reduce((acc, item) => item.price * item.quantity + acc, 0)
@@ -41,7 +39,11 @@ function Checkout() {
                 status: "pending"
             }
         ))
-        navigate(`/order/${orderData?.id}`)
+        // console.log(orderData.id)
+        // setTimeout(()=>{
+        //     console.log(orderData.id)
+        //     // navigate(`/order/${orderData?.id}`)
+        // },3000)
     }
 
     const onSubmit = (data) => {
@@ -64,6 +66,7 @@ function Checkout() {
     return (
         <>
             {!cartProducts.length && <Navigate to="/" replace={true}></Navigate>}
+            {orderData && <Navigate to={`/order/${orderData.id}`} replace={true}></Navigate>}
             <Navbar>
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">

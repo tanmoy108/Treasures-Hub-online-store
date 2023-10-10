@@ -14,6 +14,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './features/auth/AuthSlice';
 import { CartGetAsync } from './features/cartList/CartLIstSlice';
 import Order from './features/order/Order';
+import NotFound from './pages/NotFound';
+import UserOrderPage from './pages/UserOrderPage';
+import UserInfoPage from './pages/UserInfoPage';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +43,18 @@ const router = createBrowserRouter([
     path: "/order/:id",
     element: <Protected><Order /></Protected>,
   },
+  {
+    path: "/profile",
+    element: <Protected><UserInfoPage /></Protected>,
+  },
+  {
+    path: "/myorder",
+    element: <Protected><UserOrderPage /></Protected>,
+  },
+  {
+    path: "*",
+    element: <NotFound/>,
+  },
 ]);
 
 function App() {
@@ -47,7 +62,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (userData) dispatch(CartGetAsync(userData.id))
-  }, [userData])
+  }, [dispatch,userData])
 
   return (
     <div className="App">
