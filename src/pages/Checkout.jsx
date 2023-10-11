@@ -7,12 +7,13 @@ import { selectCart } from '../features/cartList/CartLIstSlice';
 import CartList from '../features/cartList/CartList';
 import { useForm } from "react-hook-form";
 import { PostOrderAsync, selectOrder } from '../features/order/orderSlice';
-import { patchUserAsync, selectUser } from '../features/auth/AuthSlice';
+import { patchUserAsync } from '../features/auth/AuthSlice';
 import { useState } from 'react';
+import { selectUserInfo } from '../features/user/userSlice';
 
 function Checkout() {
     const cartProducts = useSelector(selectCart)
-    const userData = useSelector(selectUser);
+    const userData = useSelector(selectUserInfo);
     const orderData = useSelector(selectOrder);
     console.log(orderData)
     const dispatch = useDispatch();

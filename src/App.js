@@ -17,6 +17,7 @@ import Order from './features/order/Order';
 import NotFound from './pages/NotFound';
 import UserOrderPage from './pages/UserOrderPage';
 import UserInfoPage from './pages/UserInfoPage';
+import { fetchUserInfoAsync, fetchUserOrderAsync } from './features/user/userSlice';
 
 const router = createBrowserRouter([
   {
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <NotFound/>,
+    element: <NotFound />,
   },
 ]);
 
@@ -61,8 +62,12 @@ function App() {
   const userData = useSelector(selectUser);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (userData) dispatch(CartGetAsync(userData.id))
-  }, [dispatch,userData])
+    if (userData) {
+      dispatch(CartGetAsync(userData.id))
+      dispatch(fetchUserInfoAsync(userData.id))
+    }
+  }, [dispatch, userData])
+
 
   return (
     <div className="App">

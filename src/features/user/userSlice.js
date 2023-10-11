@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchUserOrder,fetchUserInfo } from './userAPI';
+import { fetchUserOrder,fetchUserInfo, PatchUsers } from './userAPI';
 
 
 const initialState = {
@@ -21,6 +21,14 @@ export const fetchUserInfoAsync = createAsyncThunk(
     return response.data;
   }
 );
+export const UpdateUserInfoAsync = createAsyncThunk(
+  'userInfo/PatchUsers',
+  async (userInfo) => {
+    const response = await PatchUsers(userInfo);
+    return response.data;
+  }
+);
+
 
 export const userInfoSlice = createSlice({
   name: 'userInfo',
@@ -45,7 +53,14 @@ export const userInfoSlice = createSlice({
       .addCase(fetchUserInfoAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.userInfo= action.payload;
-      });
+      })
+      .addCase(UpdateUserInfoAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(UpdateUserInfoAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.userInfo= action.payload;
+      })
   },
 });
 
