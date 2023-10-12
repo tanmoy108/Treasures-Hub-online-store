@@ -81,7 +81,7 @@ export default function UserProfile() {
                   <ul role="list" className="-my-6 divide-y divide-gray-200">
                     <div className="border-b border-gray-900/10 pb-12">
                       <ul role="list">
-                        {openAddForm == true &&  <form noValidate onSubmit={handleSubmit((data) => {
+                        {openAddForm === true &&  <form noValidate onSubmit={handleSubmit((data) => {
                               onAdd(data)
                             })} className="bg-white px-5 py-12 mt-12">
                               <div className="space-y-12">

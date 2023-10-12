@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom';
 import { selectCart } from '../cartList/CartLIstSlice';
+import { selectUserInfo } from '../user/userSlice';
 const user = {
   name: 'Tom Cook',
   email: 'tom@example.com',
@@ -13,16 +14,14 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
+  { name: 'Dashboard', href: '/myorder', user: true },
+  { name: 'Team', href: '#', user: true },
+  { name: 'Admin', href: '/admin', admin: true }
 ]
 const userNavigation = [
   { name: 'My Profile', href: '/profile' },
   { name: 'My Order', href: '/myorder' },
-  { name: 'Sign out', href: '/login' },
+  { name: 'Sign out', href: '/logout' },
 ]
 
 function classNames(...classes) {
@@ -30,6 +29,7 @@ function classNames(...classes) {
 }
 
 const Navbar = ({ children }) => {
+  const userInfo = useSelector(selectUserInfo)
   const dispatch = useDispatch();
   const cartProducts = useSelector(selectCart)
   return (
@@ -52,8 +52,8 @@ const Navbar = ({ children }) => {
                     </Link>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item) => (
-                          <Link
+                        {userInfo && navigation.map((item) => (
+                          item[userInfo.role] ? (<Link
                             key={item.name}
                             to={item.href}
                             className={classNames(
@@ -65,7 +65,8 @@ const Navbar = ({ children }) => {
                             aria-current={item.current ? 'page' : undefined}
                           >
                             {item.name}
-                          </Link>
+                          </Link>) : null
+
                         ))}
                       </div>
                     </div>

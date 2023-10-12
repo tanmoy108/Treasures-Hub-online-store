@@ -40,11 +40,6 @@ function Checkout() {
                 status: "pending"
             }
         ))
-        // console.log(orderData.id)
-        // setTimeout(()=>{
-        //     console.log(orderData.id)
-        //     // navigate(`/order/${orderData?.id}`)
-        // },3000)
     }
 
     const onSubmit = (data) => {

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchUsers, PostUsers } from './AuthApi';
+import { fetchUsers,PostUsers } from './AuthApi';
 import { PatchUsers } from '../user/userAPI';
 
 const initialState = {
@@ -28,6 +28,13 @@ export const patchUserAsync = createAsyncThunk(
     return response.data;
   }
 );
+// export const logOutUserAsync = createAsyncThunk(
+//   'auth/logout',
+//   async (userData) => {
+//     const response = await logout(userData);
+//     return response.data;
+//   }
+// );
 
 export const userSlice = createSlice({
   name: 'auth',
@@ -35,6 +42,9 @@ export const userSlice = createSlice({
   reducers: {
     increment: (state) => {
       state.value += 1;
+    },
+    logOutUserAsync: (state) => {
+      state.user =null;
     }
   },
   extraReducers: (builder) => {
@@ -62,14 +72,13 @@ export const userSlice = createSlice({
       })
       .addCase(patchUserAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        console.log(state.user)
         state.user = action.payload;
       })
 
   },
 });
 
-export const { increament } = userSlice.actions;
+export const { increament,logOutUserAsync } = userSlice.actions;
 
 export const selectUser = (state) => state.users.user;
 

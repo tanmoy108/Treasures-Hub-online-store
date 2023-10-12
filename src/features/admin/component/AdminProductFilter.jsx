@@ -2,19 +2,12 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
-import Products from './Products'
+import Products from '../../productList/component/Products'
 import { useDispatch, useSelector } from 'react-redux'
-import { filterproductAsync, categoryAsync, brandAsync, selectCategoryCount, selectBrandCount } from '../ProductSlice'
+import { filterproductAsync, categoryAsync, brandAsync, selectCategoryCount, selectBrandCount } from '../../productList/ProductSlice'
 import { ITEMS_IN_PAGE } from '../../../app/constant'
-import Pagination from './Pagination'
+import Pagination from '../../productList/component/Pagination'
 
-// //pagination
-// const items = [
-//   { id: 1, title: 'Back End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote' },
-//   { id: 2, title: 'Front End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote' },
-//   { id: 3, title: 'User Interface Designer', department: 'Design', type: 'Full-time', location: 'Remote' },
-// ]
-// //.............pagination end
 
 const sortOptions = [
   { name: 'Best Rating', value: "rating", order: "desc", current: false },
@@ -27,7 +20,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const ProductListFilter = () => {
+const AdminProductListFilter = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const dispatch = useDispatch();
   const [filterSelect, setFilterSelect] = useState({})
@@ -83,6 +76,7 @@ const ProductListFilter = () => {
     dispatch(categoryAsync())
     dispatch(brandAsync())
   }, [])
+
 
   return (
     <div className="bg-white">
@@ -297,7 +291,7 @@ const ProductListFilter = () => {
 
               {/* Product grid */}
               <div className="lg:col-span-3">
-                <Products/>
+                <Products />
               </div>
             </div>
           </section>
@@ -310,4 +304,4 @@ const ProductListFilter = () => {
   )
 }
 
-export default ProductListFilter
+export default AdminProductListFilter

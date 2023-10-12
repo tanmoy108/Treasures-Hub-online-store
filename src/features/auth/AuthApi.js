@@ -29,3 +29,8 @@ export function fetchUsers(userData) {
       reject({ message: 'wrong information' })
   });
 }
+export function logout() {
+  return new Promise(async (resolve) => {
+    resolve({ status: "success" })
+  });
+}

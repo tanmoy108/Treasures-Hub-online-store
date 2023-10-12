@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import Home from './pages/Home';
+import AdminHome from './pages/AdminHome';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import Checkout from './pages/Checkout';
@@ -18,6 +19,10 @@ import NotFound from './pages/NotFound';
 import UserOrderPage from './pages/UserOrderPage';
 import UserInfoPage from './pages/UserInfoPage';
 import { fetchUserInfoAsync, fetchUserOrderAsync } from './features/user/userSlice';
+import LogoutPage from './pages/LogoutPage';
+import AdminProtected from './features/auth/component/AdminProtected';
+import AdminSpecificPage from './pages/AdminSpecificPage';
+import AdminEditProductFormPage from './pages/AdminEditProductFormPage';
 
 const router = createBrowserRouter([
   {
@@ -25,8 +30,16 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
+    path: "/admin",
+    element: <AdminProtected><AdminHome /></AdminProtected>,
+  },
+  {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/logout",
+    element: <LogoutPage />,
   },
   {
     path: "/signup",
@@ -39,6 +52,18 @@ const router = createBrowserRouter([
   {
     path: "/specificProduct/:id",
     element: <SpecificPage />,
+  },
+  {
+    path: "/admin/addProduct",
+    element: <AdminProtected><AdminEditProductFormPage /></AdminProtected>,
+  },
+  {
+    path: "/admin/addProduct/:id",
+    element: <AdminProtected><AdminEditProductFormPage /></AdminProtected>,
+  },
+  {
+    path: "/admin/specificProduct/:id",
+    element: <AdminProtected><AdminSpecificPage /></AdminProtected>,
   },
   {
     path: "/order/:id",

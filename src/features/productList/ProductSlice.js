@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchAllProduct, fetchFilterProduct, fetchAllCategories, fetchAllBrands, fetchProductById } from './ProductAPI';
+import { fetchAllProduct, fetchFilterProduct, fetchAllCategories, fetchAllBrands, fetchProductById,postProduct, patchProduct } from './ProductAPI';
 
 const initialState = {
   productArray: [],
@@ -46,12 +46,27 @@ export const specificProductAsync = createAsyncThunk(
   }
 );
 
+export const postProductAsync = createAsyncThunk(
+  'product/postProduct',
+  async (newData) => {
+    const response = await postProduct(newData);
+    return response.data;
+  }
+);
+export const patchProductAsync = createAsyncThunk(
+  'product/patchProduct',
+  async (newData) => {
+    const response = await patchProduct(newData);
+    return response.data;
+  }
+);
+
 export const ProductSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    clearSpecificProduct: (state) => {
+      state.specificProduct = null;
     }
   },
   extraReducers: (builder) => {
@@ -91,11 +106,26 @@ export const ProductSlice = createSlice({
       .addCase(specificProductAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.specificProduct = action.payload;
+      })
+      .addCase(postProductAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(postProductAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.productArray.push(action.payload );
+      })
+      .addCase(patchProductAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(patchProductAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        const index = state.productArray.findIndex((item) => item.id === action.payload.id)
+        state.productArray[index] = action.payload;
       });
   },
 });
 
-export const { increment } = ProductSlice.actions;
+export const { clearSpecificProduct } = ProductSlice.actions;
 
 export const selectProduct = (state) => state.products.productArray;
 export const selectProductCount = (state) => state.products.totalCount;

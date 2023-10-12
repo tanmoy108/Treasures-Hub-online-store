@@ -52,4 +52,29 @@ export function fetchProductById(id) {
     resolve({ data })
   });
 }
+export function postProduct(newData) {
+  return new Promise(async (resolve) => {
+    const response = await fetch('http://localhost:8000/products/',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newData)
+    })
+    const data = await response.json()
+    resolve({ data })
+  });
+}
+export function patchProduct(newData) {
+  return new Promise(async (resolve) => {
+    const response = await fetch('http://localhost:8000/products/'+newData.id,
+    {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newData)
+    })
+    const data = await response.json()
+    resolve({ data })
+  });
+}
+
 
