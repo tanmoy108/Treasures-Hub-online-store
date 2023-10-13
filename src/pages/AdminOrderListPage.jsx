@@ -1,20 +1,17 @@
 import React from 'react'
 import Navbar from '../features/navbar/Navbar'
-import ProductListFilter from '../features/productList/component/ProductFilter'
+import AdminOrderList from '../features/admin/component/AdminOrderList'
 import CartList from '../features/cartList/CartList'
-import Footer from './Footer'
 
-const Home = () => {
-
+const AdminOrderListPage = () => {
   return (
     <>
       <Navbar>
-        <ProductListFilter />
+        <AdminOrderList />
       </Navbar>
       <CartList />
-      <Footer/>
     </>
   )
 }
 
-export default Home
+export default AdminOrderListPage

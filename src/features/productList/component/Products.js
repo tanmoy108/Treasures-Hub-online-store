@@ -1,30 +1,35 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectProduct } from '../ProductSlice';
+import { selectProduct, selectProductStatus } from '../ProductSlice';
 import { Link } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/24/solid';
 import { selectUserInfo } from '../../user/userSlice';
+import { dicountPrice } from '../../../app/constant';
+import { InfinitySpin } from 'react-loader-spinner'
 
 
-export default function Products(GotoForm) {
+export default function Products() {
   const productArray = useSelector(selectProduct);
   const userInfo = useSelector(selectUserInfo);
-  // const dispatch = useDispatch();
-  
+  const status = useSelector(selectProductStatus);
+
   return (
     <div className="bg-white">
-       {userInfo && userInfo.role === "admin" &&  <Link
-                type="button"
-                to="/admin/addProduct"
-                className="cursor-pointer text-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Add Product
-              </Link>}
+      {userInfo && userInfo.role === "admin" && <Link
+        type="button"
+        to="/admin/addProduct"
+        className="cursor-pointer text-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >
+        Add Product
+      </Link>}
       <div className="mx-auto max-w-2xl px-4  sm:px-6  lg:max-w-7xl lg:px-8">
+        {status === "loading" ? <div className='w-full flex justify-center ' ><InfinitySpin
+          width='200'
+          color="#4fa94d"
+        /></div> : null}
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {productArray.map((product) => (
             <div>
-
               <Link to={`/specificProduct/${product.id}`} >
                 <div key={product.id} className="group relative shadow-md p-2 rounded-md">
                   <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
@@ -48,21 +53,26 @@ export default function Products(GotoForm) {
                       </div>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-900">${Math.round(product.price * (1 - product.discountPercentage / 100))}</p>
+                      <p className="text-sm font-medium text-gray-900">${dicountPrice(product)}</p>
                       <p className="text-sm font-medium line-through text-gray-500">${product.price}</p>
                     </div>
                   </div>
-                  {userInfo && userInfo.role === "admin" && product.deleted && <p className='text-red-500' > deletd</p>}
                 </div>
               </Link>
-             {userInfo && userInfo.role === "admin" &&  <Link
+              {userInfo && userInfo.role === "admin" && <Link
                 type="button"
                 to={`/admin/addProduct/${product.id}`}
-                
+
                 className="w-full cursor-pointer text-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Edit Product
               </Link>}
+
+              <div>
+                {userInfo && userInfo.role === "admin" && product.deleted && <p className='text-red-500 text-center' > Deleted</p>}
+                {product.stock <= 0 && <p className='bg-red-700 text-white text-center' > Out of Stock</p>}
+              </div>
+
             </div>
           ))}
         </div>

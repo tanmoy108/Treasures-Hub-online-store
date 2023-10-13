@@ -4,7 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 import Products from './Products'
 import { useDispatch, useSelector } from 'react-redux'
-import { filterproductAsync, categoryAsync, brandAsync, selectCategoryCount, selectBrandCount } from '../ProductSlice'
+import { filterproductAsync, categoryAsync, brandAsync, selectCategoryCount, selectBrandCount, selectProductCount } from '../ProductSlice'
 import { ITEMS_IN_PAGE } from '../../../app/constant'
 import Pagination from './Pagination'
 
@@ -35,7 +35,7 @@ const ProductListFilter = () => {
   const [page, setPage] = useState(1)
   const category = useSelector(selectCategoryCount)
   const brand = useSelector(selectBrandCount)
-
+  const totalItems = useSelector(selectProductCount);
   const filters = [
     {
       id: 'category',
@@ -66,11 +66,9 @@ const ProductListFilter = () => {
 
   const HandleSort = (e, option) => {
     const obj = { _sort: option.value, _order: option.order }
-    console.log(obj)
     setSortSelect(obj)
   }
   const HandlePage = (pageValue) => {
-    console.log({ pageValue })
     setPage(pageValue)
   }
 
@@ -297,7 +295,7 @@ const ProductListFilter = () => {
 
               {/* Product grid */}
               <div className="lg:col-span-3">
-                <Products/>
+                <Products />
               </div>
             </div>
           </section>
@@ -305,7 +303,7 @@ const ProductListFilter = () => {
       </div>
 
       {/* Pagination start */}
-      <Pagination HandlePage={HandlePage} page={page} setPage={setPage} />
+      <Pagination HandlePage={HandlePage} page={page} setPage={setPage} totalItems={totalItems} />
     </div>
   )
 }

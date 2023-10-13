@@ -8,7 +8,6 @@ export default function UserProfile() {
   const [openAddForm, setOpenAddForm] = useState(false)
   const dispatch = useDispatch();
   const userInfo = useSelector(selectUserInfo)
-  console.log(userInfo)
   const {
     register,
     handleSubmit,
@@ -18,7 +17,6 @@ export default function UserProfile() {
 
   const OpenEditForm = (e, index) => {
     e.preventDefault()
-    console.log(index)
     setOpenForm(index);
     setOpenAddForm(false)
     setValue("fullName", userInfo.address[index].fullName)
@@ -30,7 +28,6 @@ export default function UserProfile() {
     setValue("postalCode", userInfo.address[index].postalCode)
   }
   const HandleRemove = (e, index) => {
-    console.log(userInfo.address[index])
     const removeAddress = { ...userInfo, address: [...userInfo.address] }
     removeAddress.address.splice(index, 1)
     dispatch(UpdateUserInfoAsync(removeAddress))
@@ -38,7 +35,6 @@ export default function UserProfile() {
   }
   const HandleEdit = (data, index) => {
     const updateAddress = { ...userInfo, address: [...userInfo.address] }
-    console.log(index)
     updateAddress.address.splice(index, 1, data)
     dispatch(UpdateUserInfoAsync(updateAddress))
     setOpenForm(-1)

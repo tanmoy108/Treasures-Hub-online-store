@@ -8,7 +8,6 @@ export function fetchAllProduct() {
 
 export function fetchFilterProduct(filterSelect, sortSelect, pagination) {
   let str = '';
-  console.log(filterSelect, sortSelect)
   for (let key in filterSelect) {
     const categoriesArray = filterSelect[key];
     if (categoriesArray.length) {
@@ -24,7 +23,6 @@ export function fetchFilterProduct(filterSelect, sortSelect, pagination) {
   }
   return new Promise(async (resolve) => {
     const response = await fetch(`http://localhost:8000/products?` + str)
-    console.log(response)
     const data = await response.json()
     const totalitem = await response.headers.get('X-Total-Count')
     resolve({ data: { products: data, totalItems: +totalitem } })

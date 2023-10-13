@@ -1841,7 +1841,7 @@ const products= [
 ]
   
 const a = [...new Set([...products.map(item=>item.brand)])]
-console.log(a)
+
 
 console.log(a.map(i=>({value:i, label: i.split("-").join(" "),checked:false})))
 let f={}

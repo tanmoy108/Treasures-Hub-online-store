@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { CartDeleteAsync, CartPatchAsync, selectCart } from './CartLIstSlice';
 import { selectUser } from '../auth/AuthSlice';
+import { dicountPrice } from '../../app/constant';
+import Model from '../../pages/Model';
 
 const CartBox = () => {
+  const [openModel,setOpenModel] = useState(null)
   const cartProducts = useSelector(selectCart)
   const userData = useSelector(selectUser);
   const dispatch = useDispatch();
+
+  const HandleRemove = (e, id) => {
+    dispatch(CartDeleteAsync(id))
+  }
+
   return (
     <>
       {cartProducts.length && <div className="flow-root">
@@ -27,7 +35,7 @@ const CartBox = () => {
                     <h3>
                       {product.title}
                     </h3>
-                    <p className="ml-4">{product.price}</p>
+                    <p className="ml-4">{dicountPrice(product)}</p>
                   </div>
                   <p className="mt-1 text-sm text-gray-500">{product.color ? product.color : ''}</p>
                 </div>
@@ -54,10 +62,10 @@ const CartBox = () => {
                       </select>
                     </div>
                   </div>
-
+                  <Model Title={`Delete ${product.title}`} Message="Are you sure?" Delete="Delete" Cancel="Cancel" Action={(e) => HandleRemove(e, product.id)} CancelAction={()=>setOpenModel(null)} ShowModal={openModel == product.id} />
                   <div className="flex">
                     <button
-                      onClick={(e) => (dispatch(CartDeleteAsync(product.id)))}
+                      onClick={()=>setOpenModel(product.id)}
                       type="button"
                       className="font-medium text-indigo-600 hover:text-indigo-500"
                     >

@@ -9,14 +9,13 @@ import { selectCart } from '../cartList/CartLIstSlice';
 import { selectUserInfo } from '../user/userSlice';
 const user = {
   name: 'Tom Cook',
-  email: 'tom@example.com',
   imageUrl:
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
   { name: 'Dashboard', href: '/myorder', user: true },
-  { name: 'Team', href: '#', user: true },
-  { name: 'Admin', href: '/admin', admin: true }
+  { name: 'Admin', href: '/admin', admin: true },
+  { name: 'Order', href: '/admin/orderlist', admin: true }
 ]
 const userNavigation = [
   { name: 'My Profile', href: '/profile' },
@@ -161,7 +160,6 @@ const Navbar = ({ children }) => {
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">{user.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
                     </div>
                     <button onClick={() => dispatch(setToggle())} className="relative flex flex-row ml-auto">
                       <ShoppingBagIcon

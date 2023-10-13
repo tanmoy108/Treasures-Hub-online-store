@@ -8,7 +8,6 @@ const initialState = {
 export const CartPostAsync = createAsyncThunk(
   'cart/PostCart',
   async (data) => {
-    console.log(data)
     const response = await PostCart(data);
     return response.data;
   }
@@ -30,7 +29,6 @@ export const CartPatchAsync = createAsyncThunk(
 export const CartDeleteAsync = createAsyncThunk(
   'cart/DeleteCart',
   async (id) => {
-    console.log(id);
     const response = await DeleteCart(id);
     return response.data;
   }
@@ -38,7 +36,6 @@ export const CartDeleteAsync = createAsyncThunk(
 export const CartClearAsync = createAsyncThunk(
   'cart/ClearCart',
   async (id) => {
-    console.log(id);
     const response = await ClearCart(id);
     return response.data;
   }
@@ -59,8 +56,6 @@ export const cartSlice = createSlice({
       })
       .addCase(CartPostAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        // const isIdMatching = state.cart.some(item => item.product.id === action.payload.product.id);
-        // console.log(isIdMatching);
         state.cart.push(action.payload);
       })
       .addCase(CartGetAsync.pending, (state) => {

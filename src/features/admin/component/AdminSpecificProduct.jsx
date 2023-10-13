@@ -43,7 +43,6 @@ export default function AdminSpecificProduct() {
   const userData = useSelector(selectUser);
   const { id } = useParams();
   const navigate = useNavigate();
-  console.log(id)
   useEffect(() => {
     dispatch(specificProductAsync(id))
   }, [id])

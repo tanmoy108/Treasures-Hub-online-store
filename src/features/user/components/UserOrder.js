@@ -7,7 +7,6 @@ export default function UserOrder() {
   const userData = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const userOrder = useSelector(selectUserOrder)
-  console.log(userOrder)
 
   useEffect(() => {
     dispatch(fetchUserOrderAsync(userData.id))

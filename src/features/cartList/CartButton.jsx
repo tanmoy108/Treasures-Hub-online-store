@@ -2,10 +2,11 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { selectCart } from './CartLIstSlice'
+import {dicountPrice} from "../../app/constant"
 
 const CartButton = ({ HandleOrder }) => {
     const cartProducts = useSelector(selectCart)
-    const totalPrice = cartProducts.reduce((acc, item) => item.price * item.quantity + acc, 0)
+    const totalPrice = cartProducts.reduce((acc, item) => dicountPrice(item) * item.quantity + acc, 0)
     const totalQuantity = cartProducts.reduce((total, item) => item.quantity + total, 0)
     return (
         <>

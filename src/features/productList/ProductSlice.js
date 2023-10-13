@@ -132,5 +132,7 @@ export const selectProductCount = (state) => state.products.totalCount;
 export const selectCategoryCount = (state) => state.products.categories;
 export const selectBrandCount = (state) => state.products.brands;
 export const selectSpecificProduct = (state) => state.products.specificProduct;
+export const selectProductStatus = (state) => state.products.status;
+
 
 export default ProductSlice.reducer;

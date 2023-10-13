@@ -23,16 +23,13 @@ const AdminProductEditForm = () => {
 
 
     useEffect(() => {
-        console.log("first ")
         if (params.id) {
-            console.log("first in if")
             dispatch(specificProductAsync(params.id))
         } else dispatch(clearSpecificProduct())
     }, [dispatch, params.id])
 
 
     useEffect(() => {
-        console.log("second set")
         if (params.id && product) {
 
             setValue("title", product.title)
@@ -68,7 +65,6 @@ const AdminProductEditForm = () => {
         delete newData.image2
         delete newData.image3
         delete newData.image4
-        console.log(newData)
         if (params.id) {
             newData.id = params.id
             dispatch(patchProductAsync(newData))

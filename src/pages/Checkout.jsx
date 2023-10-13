@@ -15,7 +15,6 @@ function Checkout() {
     const cartProducts = useSelector(selectCart)
     const userData = useSelector(selectUserInfo);
     const orderData = useSelector(selectOrder);
-    console.log(orderData)
     const dispatch = useDispatch();
     const [selectAddress, setSelectAddress] = useState(null);
     const [payment, setPayment] = useState("card");
@@ -43,7 +42,6 @@ function Checkout() {
     }
 
     const onSubmit = (data) => {
-        console.log(data);
         dispatch(patchUserAsync(
             {
                 ...userData,
@@ -51,11 +49,9 @@ function Checkout() {
             }))
         reset()
     }
-    console.log(selectAddress)
     const HandleAddress = (index) => {
         setSelectAddress(userData.address[index])
     }
-    console.log(payment)
     const HandlePayment = (e) => {
         setPayment(e.target.value)
     }

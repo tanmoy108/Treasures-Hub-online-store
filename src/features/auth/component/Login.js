@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { selectUser, getUserAsync } from '../AuthSlice';
 
 
@@ -15,8 +15,10 @@ export default function Login() {
     formState: { errors },
   } = useForm()
   return (
+    <>
+    {userData && <Navigate to="/" replace={true}></Navigate>}
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      <p>{userData && userData.email}</p>
+      {/* <p>{userData && userData.email}</p> */}
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <Link to="/">
           <img
@@ -89,5 +91,6 @@ export default function Login() {
         </div>
       </div>
     </div>
+    </>
   );
 }

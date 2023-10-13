@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import { ITEMS_IN_PAGE } from '../../../app/constant'
-import { useSelector } from 'react-redux'
-import { selectProductCount } from '../ProductSlice'
 
-const Pagination = ({ HandlePage, page, setPage }) => {
-
-  const totalItems = useSelector(selectProductCount);
+const Pagination = ({ HandlePage, page, setPage, totalItems }) => {
 
   useEffect(() => {
     setPage(1)

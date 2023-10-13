@@ -5,8 +5,10 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectSpecificProduct, specificProductAsync } from '../ProductSlice'
 import { selectUser } from '../../auth/AuthSlice'
-import { CartPostAsync } from '../../cartList/CartLIstSlice'
+import { CartPostAsync, selectCart } from '../../cartList/CartLIstSlice'
 import { useNavigate } from 'react-router-dom'
+import { dicountPrice } from '../../../app/constant'
+import { useAlert } from "react-alert";
 
 
 const colors = [
@@ -41,9 +43,10 @@ export default function SpecificProduct() {
   const dispatch = useDispatch();
   const product = useSelector(selectSpecificProduct)
   const userData = useSelector(selectUser);
+  const cart = useSelector(selectCart);
   const { id } = useParams();
+  const alert = useAlert();
   const navigate = useNavigate();
-  console.log(id)
   useEffect(() => {
     dispatch(specificProductAsync(id))
   }, [id])
@@ -53,14 +56,19 @@ export default function SpecificProduct() {
     if (!userData) {
       navigate('/login');
     } else {
-      const newItem = {
-        ...product,
-        quantity: 1,
-        userId: userData.id,
-        userEmail: userData.email
+      if (cart.findIndex((item) => item.productId == product.id) < 0) {
+        console.log(product.id)
+        const newItem = {
+          ...product,
+          quantity: 1,
+          productId: product.id,
+          userId: userData.id,
+          userEmail: userData.email
+        }
+        delete newItem['id']
+        dispatch(CartPostAsync(newItem))
       }
-      delete newItem['id']
-      dispatch(CartPostAsync(newItem))
+      else alert.show("Already Added!");
     }
 
   }
@@ -111,7 +119,7 @@ export default function SpecificProduct() {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">${product.price}</p>
+            <p className="text-3xl tracking-tight text-gray-900">${dicountPrice(product)}</p>
 
             {/* Reviews */}
             <div className="mt-6">
