@@ -52,12 +52,13 @@ const AdminOrderList = () => {
                                                 </div>
                                             </td>
                                             <td className="py-3 px-6 text-left">
-                                                {order.products.map(item => (
-                                                    <div className="flex items-center">
+                                                {order.products.map((item,index )=> (
+                                                    <div key={index} className="flex items-center">
                                                         <div className="mr-2">
                                                             <img
                                                                 className="w-6 h-6 rounded-full"
                                                                 src={item.thumbnail}
+                                                                alt={item.title}
                                                             />
                                                         </div>
                                                         <span>{item.title} #{item.quantity}</span>

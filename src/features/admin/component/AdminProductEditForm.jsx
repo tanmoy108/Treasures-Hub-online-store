@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 import { useForm } from "react-hook-form"
 import { clearSpecificProduct, patchProductAsync, postProductAsync, selectBrandCount, selectCategoryCount, selectSpecificProduct, specificProductAsync } from '../../productList/ProductSlice'
 import { useDispatch, useSelector } from 'react-redux'
@@ -15,10 +14,8 @@ const AdminProductEditForm = () => {
     const {
         register,
         handleSubmit,
-        watch,
         reset,
         setValue,
-        formState: { errors },
     } = useForm()
 
 
@@ -47,7 +44,7 @@ const AdminProductEditForm = () => {
             setValue("image4", product.images[3])
         }
 
-    }, [product, dispatch, params.id])
+    }, [product,setValue, dispatch, params.id])
 
 
     const HandleData = (data) => {
@@ -188,8 +185,8 @@ const AdminProductEditForm = () => {
                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                                 >
                                     <option>Choose Category</option>
-                                    {category.map((item) =>
-                                        <option value={item.value}>{item.label}</option>
+                                    {category.map((item,index) =>
+                                        <option key={index} value={item.value}>{item.label}</option>
                                     )}
 
                                 </select>
@@ -206,8 +203,8 @@ const AdminProductEditForm = () => {
                                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                                 >
                                     <option>Choose brand</option>
-                                    {brand.map((item) =>
-                                        <option value={item.value}>{item.label}</option>
+                                    {brand.map((item,index) =>
+                                        <option key={index} value={item.value}>{item.label}</option>
                                     )}
                                 </select>
                             </div>

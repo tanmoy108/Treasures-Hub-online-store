@@ -81,9 +81,9 @@ export default function UserProfile() {
                   Add Address
                 </button>
                 <div className="flow-root" >
-                  <ul role="list" className="-my-6 divide-y divide-gray-200">
+                  <ul className="-my-6 divide-y divide-gray-200">
                     <div className="border-b border-gray-900/10 pb-12">
-                      <ul role="list">
+                      <ul>
                         {openAddForm === true &&  <form noValidate onSubmit={handleSubmit((data) => {
                               onAdd(data)
                             })} className="bg-white px-5 py-12 mt-12">
@@ -240,7 +240,7 @@ export default function UserProfile() {
                               </div>
                             </form>}
                         {userInfo.address && userInfo.address.map((address, index) => (
-                          <>
+                          <div key={index}>
                             {/* form start */}
                             {openForm === index && <form noValidate onSubmit={handleSubmit((data) => {
                               HandleEdit(data, index)
@@ -441,7 +441,7 @@ export default function UserProfile() {
                                 </button>
                               </div>
                             </li>
-                          </>
+                          </div>
                         ))}
                       </ul>
                       {/* address end */}
