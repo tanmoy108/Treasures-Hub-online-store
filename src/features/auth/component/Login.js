@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Navigate } from 'react-router-dom';
-import { selectUser, getUserAsync } from '../AuthSlice';
+import { selectUser, getUserAsync, selectError } from '../AuthSlice';
 
 
 export default function Login() {
   const userData = useSelector(selectUser);
+  const error = useSelector(selectError)
+  console.log({error})
   const dispatch = useDispatch();
-
+  console.log({userData})
   const {
     register,
     handleSubmit,
@@ -30,6 +32,7 @@ export default function Login() {
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign in to your account
         </h2>
+        {error && <h2 className="text-red-600 text-center" > {error.status}</h2>}
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

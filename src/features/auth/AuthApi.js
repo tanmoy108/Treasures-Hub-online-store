@@ -1,7 +1,7 @@
 export function PostUsers(userData) {
   return new Promise(async (resolve) => {
 
-    const response = await fetch('http://localhost:8000/users',
+    const response = await fetch('http://localhost:8000/auth/signup',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -12,19 +12,26 @@ export function PostUsers(userData) {
     resolve({ data })
   });
 }
-export function fetchUsers(userData) {
+export function CheckUsers(userData) {
   return new Promise(async (resolve, reject) => {
-    const email = userData.email;
-    const password = userData.password;
+    try {
+      const response = await fetch('http://localhost:8000/auth/signin',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData)
+        })
+      if (response.ok) {
+        const data = await response.json()
+        resolve({ data })
+      } else {
+        const err = await response.json()
+        reject(err)
+      }
+    } catch (error) {
+      reject(error)
+    }
 
-    const response = await fetch('http://localhost:8000/users?email=' + email)
-    const data = await response.json()
-    if (data.length) {
-      if (password === data[0].password) {
-        resolve({ data: data[0] })
-      } else reject({ message: 'wrong information' })
-    } else
-      reject({ message: 'wrong information' })
   });
 }
 export function logout() {

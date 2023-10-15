@@ -8,6 +8,7 @@ export default function UserProfile() {
   const [openAddForm, setOpenAddForm] = useState(false)
   const dispatch = useDispatch();
   const userInfo = useSelector(selectUserInfo)
+  console.log(userInfo)
   const {
     register,
     handleSubmit,
@@ -65,6 +66,12 @@ export default function UserProfile() {
               <div className="border-t border-gray-200 px-4 py-3 sm:px-6">
                 <h1 className="text-2xl my-10 font-bold tracking-tight text-gray-900">
                   Street Address
+                </h1>
+                <h1 className="text-2xl my-10 font-bold tracking-tight text-gray-900">
+                  {userInfo.name}
+                </h1>
+                <h1 className="text-2xl my-10 font-bold tracking-tight text-red-900">
+                  {userInfo.email}
                 </h1>
                 <button
                   onClick={() => HandleAddForm()}
@@ -232,7 +239,7 @@ export default function UserProfile() {
                                 </div>
                               </div>
                             </form>}
-                        {userInfo && userInfo.address.map((address, index) => (
+                        {userInfo.address && userInfo.address.map((address, index) => (
                           <>
                             {/* form start */}
                             {openForm === index && <form noValidate onSubmit={handleSubmit((data) => {

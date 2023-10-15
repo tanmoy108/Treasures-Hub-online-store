@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchUsers,PostUsers } from './AuthApi';
+import { CheckUsers, PostUsers } from './AuthApi';
 import { PatchUsers } from '../user/userAPI';
 
 const initialState = {
@@ -15,10 +15,15 @@ export const userAsync = createAsyncThunk(
   }
 );
 export const getUserAsync = createAsyncThunk(
-  'auth/fetchUsers',
-  async (userData) => {
-    const response = await fetchUsers(userData);
-    return response.data;
+  'auth/CheckUsers',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await CheckUsers(userData);
+      return response.data;
+    } catch (err) {
+      console.log(err)
+      return rejectWithValue(err)
+    }
   }
 );
 export const patchUserAsync = createAsyncThunk(
@@ -44,7 +49,7 @@ export const userSlice = createSlice({
       state.value += 1;
     },
     logOutUserAsync: (state) => {
-      state.user =null;
+      state.user = null;
     }
   },
   extraReducers: (builder) => {
@@ -65,7 +70,8 @@ export const userSlice = createSlice({
       })
       .addCase(getUserAsync.rejected, (state, action) => {
         state.status = 'error';
-        state.error = action.error;
+        state.error = action.payload;
+        console.log(action.error)
       })
       .addCase(patchUserAsync.pending, (state) => {
         state.status = 'loading';
@@ -78,8 +84,9 @@ export const userSlice = createSlice({
   },
 });
 
-export const { increament,logOutUserAsync } = userSlice.actions;
+export const { increament, logOutUserAsync } = userSlice.actions;
 
 export const selectUser = (state) => state.users.user;
+export const selectError = (state) => state.users.error;
 
 export default userSlice.reducer;

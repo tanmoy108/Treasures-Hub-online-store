@@ -5,10 +5,11 @@ export function fetchUserOrder(userId) {
     resolve({data})
   });
 }
-export function fetchUserInfo(userId) {
+export function fetchUserInfo(id) {
   return new Promise(async (resolve) =>{
-    const response = await fetch('http://localhost:8000/users/'+userId) 
+    const response = await fetch('http://localhost:8000/users/'+id) 
     const data = await response.json()
+    console.log(data)
     resolve({data})
   });
 }
