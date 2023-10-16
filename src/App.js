@@ -13,7 +13,7 @@ import SpecificPage from './pages/SpecificPage';
 import Protected from './features/auth/component/Protected';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from './features/auth/AuthSlice';
-import { CartGetAsync, selectCart } from './features/cartList/CartLIstSlice';
+import { CartGetAsync } from './features/cartList/CartLIstSlice';
 import Order from './features/order/Order';
 import NotFound from './pages/NotFound';
 import UserOrderPage from './pages/UserOrderPage';
@@ -26,6 +26,7 @@ import AdminEditProductFormPage from './pages/AdminEditProductFormPage';
 import AdminOrderListPage from './pages/AdminOrderListPage';
 import { positions, Provider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import CartPage from './pages/CartPage';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignupPage />,
+  },
+  {
+    path: "/cart",
+    element: <Protected><CartPage/></Protected>,
   },
   {
     path: "/checkout",
@@ -92,14 +97,13 @@ const router = createBrowserRouter([
 
 function App() {
   const userData = useSelector(selectUser);
-  const cartProducts = useSelector(selectCart)
   const dispatch = useDispatch();
   useEffect(() => {
     if (userData) {
       dispatch(CartGetAsync(userData.id))
       dispatch(fetchUserInfoAsync(userData.id))
     }
-  }, [dispatch, userData, cartProducts])
+  }, [dispatch, userData])
 
   const options = {
     timeout: 5000,

@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon, ShoppingCartIcon } from '@heroicons/react/24/outline'
-import { setToggle } from './NavbarSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { ShoppingBagIcon } from '@heroicons/react/24/outline'
+import React, { Fragment } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { useSelector } from 'react-redux';
+import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { selectCart } from '../cartList/CartLIstSlice';
 import { selectUserInfo } from '../user/userSlice';
@@ -29,7 +28,6 @@ function classNames(...classes) {
 
 const Navbar = ({ children }) => {
   const userInfo = useSelector(selectUserInfo)
-  const dispatch = useDispatch();
   const cartProducts = useSelector(selectCart)
   return (
     <>
@@ -73,13 +71,13 @@ const Navbar = ({ children }) => {
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
 
-                      <button onClick={() => dispatch(setToggle())} className="group -m-2 flex items-center p-2">
+                      <Link to="/cart" className="group -m-2 flex items-center p-2">
                         <ShoppingBagIcon
                           className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                           aria-hidden="true"
                         />
                         <span className="-ml-2 text-sm bg-red-600 px-2 mb-2 rounded-lg font-medium text-white">{cartProducts.length ? cartProducts.length : ''}</span>
-                      </button>
+                      </Link>
 
 
                       {/* Profile dropdown */}
@@ -161,13 +159,13 @@ const Navbar = ({ children }) => {
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">{user.name}</div>
                     </div>
-                    <button onClick={() => dispatch(setToggle())} className="relative flex flex-row ml-auto">
+                    <Link to="/cart" className="relative flex flex-row ml-auto">
                       <ShoppingBagIcon
                         className="h-7 w-7 text-gray-400 group-hover:text-gray-500"
                         aria-hidden="true"
                       />
                       <span className="absolute  ml-3 text-sm bg-red-600 px-2 rounded-lg font-medium text-white">{cartProducts.length ? cartProducts.length : ''}</span>
-                    </button>
+                    </Link>
                   </div>
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (

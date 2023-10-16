@@ -4,7 +4,6 @@ import CartBox from '../features/cartList/CartBox';
 import CartButton from '../features/cartList/CartButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCart } from '../features/cartList/CartLIstSlice';
-import CartList from '../features/cartList/CartList';
 import { useForm } from "react-hook-form";
 import { PostOrderAsync, selectOrder } from '../features/order/orderSlice';
 import { patchUserAsync } from '../features/auth/AuthSlice';
@@ -338,7 +337,6 @@ function Checkout() {
                     </div>
                 </div>
             </Navbar>
-            <CartList />
         </>
 
     );

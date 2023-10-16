@@ -6,7 +6,7 @@ import {dicountPrice} from "../../app/constant"
 
 const CartButton = ({ HandleOrder }) => {
     const cartProducts = useSelector(selectCart)
-    const totalPrice = cartProducts.reduce((acc, item) => dicountPrice(item) * item.quantity + acc, 0)
+    const totalPrice = cartProducts.reduce((acc, item) => dicountPrice(item.product) * item.quantity + acc, 0)
     const totalQuantity = cartProducts.reduce((total, item) => item.quantity + total, 0)
     return (
         <>

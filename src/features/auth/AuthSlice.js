@@ -21,7 +21,6 @@ export const getUserAsync = createAsyncThunk(
       const response = await CheckUsers(userData);
       return response.data;
     } catch (err) {
-      console.log(err)
       return rejectWithValue(err)
     }
   }
@@ -71,7 +70,6 @@ export const userSlice = createSlice({
       .addCase(getUserAsync.rejected, (state, action) => {
         state.status = 'error';
         state.error = action.payload;
-        console.log(action.error)
       })
       .addCase(patchUserAsync.pending, (state) => {
         state.status = 'loading';

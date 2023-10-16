@@ -21,8 +21,8 @@ export const CartGetAsync = createAsyncThunk(
 );
 export const CartPatchAsync = createAsyncThunk(
   'cart/PatchCart',
-  async (id) => {
-    const response = await PatchCart(id);
+  async (item) => {
+    const response = await PatchCart(item);
     return response.data;
   }
 );

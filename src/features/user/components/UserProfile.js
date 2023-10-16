@@ -8,7 +8,6 @@ export default function UserProfile() {
   const [openAddForm, setOpenAddForm] = useState(false)
   const dispatch = useDispatch();
   const userInfo = useSelector(selectUserInfo)
-  console.log(userInfo)
   const {
     register,
     handleSubmit,

@@ -49,23 +49,19 @@ export default function SpecificProduct() {
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(specificProductAsync(id))
-  }, [id])
+  }, [dispatch,id])
 
   const HandleCart = (e) => {
     e.preventDefault();
     if (!userData) {
       navigate('/login');
     } else {
-      if (cart.findIndex((item) => item.productId == product.id) < 0) {
-        console.log(product.id)
+      if (cart.findIndex((item) => item.product.id === product.id) < 0) {
         const newItem = {
-          ...product,
           quantity: 1,
-          productId: product.id,
-          userId: userData.id,
-          userEmail: userData.email
+          product: product.id,
+          user: userData.id,
         }
-        delete newItem['id']
         dispatch(CartPostAsync(newItem))
       }
       else alert.show("Already Added!");
@@ -183,7 +179,7 @@ export default function SpecificProduct() {
               <div className="mt-10">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                  <a href="www.facebook.com" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
                     Size guide
                   </a>
                 </div>
@@ -267,7 +263,7 @@ export default function SpecificProduct() {
               <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
 
               <div className="mt-4">
-                <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
+                <ul className="list-disc space-y-2 pl-4 text-sm">
                   {highlights.map((highlight) => (
                     <li key={highlight} className="text-gray-400">
                       <span className="text-gray-600">{highlight}</span>
