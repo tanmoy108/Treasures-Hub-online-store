@@ -6,7 +6,7 @@ export function fetchAllProduct() {
   });
 }
 
-export function fetchFilterProduct(filterSelect, sortSelect, pagination) {
+export function fetchFilterProduct(filterSelect, sortSelect, pagination,admin) {
   let str = '';
   for (let key in filterSelect) {
     const categoriesArray = filterSelect[key];
@@ -21,6 +21,11 @@ export function fetchFilterProduct(filterSelect, sortSelect, pagination) {
   for (let key in pagination) {
     str += `${key}=${pagination[key]}&`
   }
+  if(admin)
+  {
+    str += `admin=true`
+  }
+ 
   return new Promise(async (resolve) => {
     const response = await fetch(`http://localhost:8000/products?` + str)
     const data = await response.json()

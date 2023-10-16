@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUser } from '../../auth/AuthSlice';
 import { fetchUserOrderAsync, selectUserInfo, selectUserOrder } from '../userSlice';
 
 export default function UserOrder() {
   const userData = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const userOrder = useSelector(selectUserOrder)
-
+  console.log(userOrder)
   useEffect(() => {
     dispatch(fetchUserOrderAsync(userData.id))
   }, [dispatch, userData])
@@ -34,14 +33,16 @@ export default function UserOrder() {
                     <li className="text-slate-600 " >Street: {product.address.streetAddress}</li>
                     <li className="text-slate-600 ">City: {product.address.city}</li>
                   </ul>
+                 <h2 className=' mt-5 ' > <span className='font-bold text-gray-800'>Total Amount: </span>{product.price}</h2>
+                 <h2 className=' mb-5 ' > <span className='font-bold text-gray-800'>Total Quantity: </span>{product.quantity}</h2>
                   <div className="flow-root" >
-                    <ul role="list" className="-my-6 divide-y divide-gray-200">
+                    <ul className="-my-6 divide-y divide-gray-200">
                       {userOrder && product.products.map((item, index) => (
                         <li key={index} className="flex py-6">
                           <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                             <img
-                              src={item.thumbnail}
-                              alt={item.title}
+                              src={item.product.thumbnail}
+                              alt={item.product.title}
                               className="h-full w-full object-cover object-center"
                             />
                           </div>
@@ -50,9 +51,9 @@ export default function UserOrder() {
                             <div>
                               <div className="flex justify-between text-base font-medium text-gray-900">
                                 <h3>
-                                  {item.title}
+                                  {item.product.title}
                                 </h3>
-                                <p className="ml-4">{item.price}</p>
+                                <p className="ml-4">{item.product.price}</p>
                               </div>
                               {/* <p className="mt-1 text-sm text-gray-500">{item.color ? item.color : ''}</p> */}
                             </div>

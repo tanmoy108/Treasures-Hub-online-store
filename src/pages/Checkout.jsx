@@ -23,10 +23,13 @@ function Checkout() {
         reset,
     } = useForm()
 
-    const totalPrice = cartProducts.reduce((acc, item) => item.price * item.quantity + acc, 0)
+    const totalPrice = cartProducts.reduce((acc, item) => item.product.price * item.quantity + acc, 0)
     const totalQuantity = cartProducts.reduce((total, item) => item.quantity + total, 0)
 
     const HandleOrder = () => {
+        console.log(totalPrice,totalQuantity)
+       if(selectAddress && payment)
+       {
         dispatch(PostOrderAsync(
             {
                 products: cartProducts,
@@ -38,6 +41,7 @@ function Checkout() {
                 status: "pending"
             }
         ))
+       }
     }
 
     const onSubmit = (data) => {

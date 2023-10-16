@@ -68,13 +68,13 @@ const AdminProductListFilter = () => {
 
   useEffect(() => {
     const pagination = { _page: page, _limit: ITEMS_IN_PAGE }
-    dispatch(filterproductAsync({ filterSelect, sortSelect, pagination }))
-  }, [filterSelect, sortSelect, page])
+    dispatch(filterproductAsync({ filterSelect, sortSelect, pagination,admin:true }))
+  }, [dispatch,filterSelect, sortSelect, page])
 
   useEffect(() => {
     dispatch(categoryAsync())
     dispatch(brandAsync())
-  }, [])
+  }, [dispatch])
 
 
   return (
