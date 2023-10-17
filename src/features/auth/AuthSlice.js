@@ -32,13 +32,7 @@ export const patchUserAsync = createAsyncThunk(
     return response.data;
   }
 );
-// export const logOutUserAsync = createAsyncThunk(
-//   'auth/logout',
-//   async (userData) => {
-//     const response = await logout(userData);
-//     return response.data;
-//   }
-// );
+
 
 export const userSlice = createSlice({
   name: 'auth',

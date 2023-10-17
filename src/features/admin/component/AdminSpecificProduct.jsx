@@ -7,6 +7,7 @@ import { selectSpecificProduct, specificProductAsync } from '../../productList/P
 import { selectUser } from '../../auth/AuthSlice'
 import { CartPostAsync } from '../../cartList/CartLIstSlice'
 import { useNavigate } from 'react-router-dom'
+import { selectUserInfo } from '../../user/userSlice'
 
 
 const colors = [
@@ -41,6 +42,7 @@ export default function AdminSpecificProduct() {
   const dispatch = useDispatch();
   const product = useSelector(selectSpecificProduct)
   const userData = useSelector(selectUser);
+  const userInfo = useSelector(selectUserInfo);
   const { id } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
@@ -55,8 +57,8 @@ export default function AdminSpecificProduct() {
       const newItem = {
         ...product,
         quantity: 1,
-        userId: userData.id,
-        userEmail: userData.email
+        userId: userInfo.id,
+        userEmail: userInfo.email
       }
       delete newItem['id']
       dispatch(CartPostAsync(newItem))

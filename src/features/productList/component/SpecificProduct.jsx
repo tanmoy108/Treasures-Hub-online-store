@@ -9,6 +9,7 @@ import { CartPostAsync, selectCart } from '../../cartList/CartLIstSlice'
 import { useNavigate } from 'react-router-dom'
 import { dicountPrice } from '../../../app/constant'
 import { useAlert } from "react-alert";
+import { selectUserInfo } from '../../user/userSlice'
 
 
 const colors = [
@@ -43,6 +44,7 @@ export default function SpecificProduct() {
   const dispatch = useDispatch();
   const product = useSelector(selectSpecificProduct)
   const userData = useSelector(selectUser);
+  const userInfo = useSelector(selectUserInfo);
   const cart = useSelector(selectCart);
   const { id } = useParams();
   const alert = useAlert();
@@ -60,7 +62,7 @@ export default function SpecificProduct() {
         const newItem = {
           quantity: 1,
           product: product.id,
-          user: userData.id,
+          user: userInfo.id,
         }
         dispatch(CartPostAsync(newItem))
       }
