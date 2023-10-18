@@ -7,7 +7,7 @@ import { selectSpecificProduct, specificProductAsync } from '../ProductSlice'
 import { selectUser } from '../../auth/AuthSlice'
 import { CartPostAsync, selectCart } from '../../cartList/CartLIstSlice'
 import { useNavigate } from 'react-router-dom'
-import { dicountPrice } from '../../../app/constant'
+import { discountPrice } from '../../../app/constant'
 import { useAlert } from "react-alert";
 import { selectUserInfo } from '../../user/userSlice'
 
@@ -117,7 +117,7 @@ export default function SpecificProduct() {
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">${dicountPrice(product)}</p>
+            <p className="text-3xl tracking-tight text-gray-900">${discountPrice(product)}</p>
 
             {/* Reviews */}
             <div className="mt-6">

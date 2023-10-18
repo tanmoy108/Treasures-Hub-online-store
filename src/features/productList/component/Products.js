@@ -4,7 +4,7 @@ import { selectProduct, selectProductStatus } from '../ProductSlice';
 import { Link } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/24/solid';
 import { selectUserInfo } from '../../user/userSlice';
-import { dicountPrice } from '../../../app/constant';
+import { discountPrice } from '../../../app/constant';
 import { InfinitySpin } from 'react-loader-spinner'
 
 
@@ -53,7 +53,7 @@ export default function Products() {
                       </div>
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-gray-900">${dicountPrice(product)}</p>
+                      <p className="text-sm font-medium text-gray-900">${discountPrice(product)}</p>
                       <p className="text-sm font-medium line-through text-gray-500">${product.price}</p>
                     </div>
                   </div>

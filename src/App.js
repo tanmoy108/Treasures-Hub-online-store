@@ -27,6 +27,7 @@ import AdminOrderListPage from './pages/AdminOrderListPage';
 import { positions, Provider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import CartPage from './pages/CartPage';
+import StripeCheckout from './pages/StripeCheckout';
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
   {
     path: "/admin/orderlist",
     element: <AdminProtected><AdminOrderListPage /></AdminProtected>,
+  },
+  {
+    path: "/stripe_checkout",
+    element: <Protected><StripeCheckout /></Protected>,
   },
   {
     path: "/order/:id",

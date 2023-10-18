@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartDeleteAsync, CartPatchAsync, selectCart } from './CartLIstSlice';
 import { selectUser } from '../auth/AuthSlice';
-import { dicountPrice } from '../../app/constant';
+import { discountPrice } from '../../app/constant';
 import Model from '../../pages/Model';
 
 const CartBox = () => {
@@ -35,7 +35,7 @@ const CartBox = () => {
                     <h3>
                       {item.product.title}
                     </h3>
-                    <p className="ml-4">{dicountPrice(item.product)}</p>
+                    <p className="ml-4">{discountPrice(item.product)}</p>
                   </div>
                   <p className="mt-1 text-sm text-gray-500">{item.color ? item.color : ''}</p>
                 </div>

@@ -9,6 +9,7 @@ import { PostOrderAsync, selectOrder } from '../features/order/orderSlice';
 import { patchUserAsync } from '../features/auth/AuthSlice';
 import { useState } from 'react';
 import { selectUserInfo } from '../features/user/userSlice';
+import { discountPrice } from '../app/constant';
 
 function Checkout() {
     const cartProducts = useSelector(selectCart)
@@ -23,7 +24,7 @@ function Checkout() {
         reset,
     } = useForm()
 
-    const totalPrice = cartProducts.reduce((acc, item) => item.product.price * item.quantity + acc, 0)
+    const totalPrice = cartProducts.reduce((acc, item) => discountPrice(item.product) * item.quantity + acc, 0)
     const totalQuantity = cartProducts.reduce((total, item) => item.quantity + total, 0)
 
     const HandleOrder = () => {
@@ -61,7 +62,8 @@ function Checkout() {
     return (
         <>
             {!cartProducts.length && <Navigate to="/" replace={true}></Navigate>}
-            {orderData && <Navigate to={`/order/${orderData.id}`} replace={true}></Navigate>}
+            {orderData && orderData.method==="cash" && <Navigate to={`/order/${orderData.id}`} replace={true}></Navigate>}
+            {orderData && orderData.method==="card" && <Navigate to="/stripe_checkout" replace={true}></Navigate>}
             <Navbar>
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">

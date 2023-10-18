@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchUserOrder,fetchUserInfo, PatchUsers } from './userAPI';
 
-
 const initialState = {
   userOrder:null,
   status: 'idle',
@@ -29,7 +28,6 @@ export const UpdateUserInfoAsync = createAsyncThunk(
   }
 );
 
-
 export const userInfoSlice = createSlice({
   name: 'userInfo',
   initialState,
@@ -46,6 +44,7 @@ export const userInfoSlice = createSlice({
       .addCase(fetchUserOrderAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.userOrder= action.payload;
+        console.log(action.payload);
       })
       .addCase(fetchUserInfoAsync.pending, (state) => {
         state.status = 'loading';
