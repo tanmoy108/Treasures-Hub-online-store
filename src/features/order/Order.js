@@ -12,7 +12,7 @@ export default function Order() {
   const params = useParams();
 
   useEffect(() => {
-    dispatch(CartClearAsync(userData.id))
+    dispatch(CartClearAsync())
     dispatch(clearCurrentOrder())
   }, [dispatch, userData])
 

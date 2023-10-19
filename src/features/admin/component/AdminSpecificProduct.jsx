@@ -57,10 +57,7 @@ export default function AdminSpecificProduct() {
       const newItem = {
         ...product,
         quantity: 1,
-        userId: userInfo.id,
-        userEmail: userInfo.email
       }
-      delete newItem['id']
       dispatch(CartPostAsync(newItem))
     }
 

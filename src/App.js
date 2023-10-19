@@ -12,7 +12,7 @@ import Checkout from './pages/Checkout';
 import SpecificPage from './pages/SpecificPage';
 import Protected from './features/auth/component/Protected';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from './features/auth/AuthSlice';
+import { CheckAuthAsync, selectCheckAuth, selectUser } from './features/auth/AuthSlice';
 import { CartGetAsync } from './features/cartList/CartLIstSlice';
 import Order from './features/order/Order';
 import NotFound from './pages/NotFound';
@@ -102,11 +102,17 @@ const router = createBrowserRouter([
 
 function App() {
   const userData = useSelector(selectUser);
+  const authData = useSelector(selectCheckAuth)
   const dispatch = useDispatch();
+
+  useEffect(() => {
+      dispatch(CheckAuthAsync())
+  }, [dispatch])
+
   useEffect(() => {
     if (userData) {
-      dispatch(CartGetAsync(userData.id))
-      dispatch(fetchUserInfoAsync(userData.id))
+      dispatch(CartGetAsync())
+      dispatch(fetchUserInfoAsync())
     }
   }, [dispatch, userData])
 
@@ -117,9 +123,9 @@ function App() {
 
   return (
     <div className="App">
-      <Provider template={AlertTemplate} {...options}>
+      {authData && <Provider template={AlertTemplate} {...options}>
         <RouterProvider router={router} />
-      </Provider>
+      </Provider>}
     </div>
   );
 }

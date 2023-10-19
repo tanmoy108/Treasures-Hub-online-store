@@ -3,7 +3,8 @@ import { GetCart, PostCart, PatchCart, DeleteCart, ClearCart } from './CartListA
 
 const initialState = {
   status: 'idle',
-  cart: []
+  cart: [],
+  checkCart:false
 };
 export const CartPostAsync = createAsyncThunk(
   'cart/PostCart',
@@ -14,8 +15,8 @@ export const CartPostAsync = createAsyncThunk(
 );
 export const CartGetAsync = createAsyncThunk(
   'cart/GetCart',
-  async (id) => {
-    const response = await GetCart(id);
+  async () => {
+    const response = await GetCart();
     return response.data;
   }
 );
@@ -35,8 +36,8 @@ export const CartDeleteAsync = createAsyncThunk(
 );
 export const CartClearAsync = createAsyncThunk(
   'cart/ClearCart',
-  async (id) => {
-    const response = await ClearCart(id);
+  async () => {
+    const response = await ClearCart();
     return response.data;
   }
 );
@@ -64,6 +65,11 @@ export const cartSlice = createSlice({
       .addCase(CartGetAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.cart = action.payload;
+        state.checkCart = true;
+      })
+      .addCase(CartGetAsync.rejected, (state, action) => {
+        state.status = 'idle';
+        state.checkCart = true;
       })
       .addCase(CartPatchAsync.pending, (state) => {
         state.status = 'loading';
@@ -94,5 +100,6 @@ export const cartSlice = createSlice({
 export const { increment } = cartSlice.actions;
 
 export const selectCart = (state) => state.carts.cart;
+export const selectCartAuth = (state) => state.carts.checkCart;
 
 export default cartSlice.reducer;

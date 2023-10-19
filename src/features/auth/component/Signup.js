@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { selectUser, userAsync } from '../AuthSlice';
 import { useForm, SubmitHandler } from "react-hook-form"
+import { selectUserInfo } from '../../user/userSlice';
 
 export default function Signup() {
   const userData = useSelector(selectUser);
+  const userInfo = useSelector(selectUserInfo);
   const dispatch = useDispatch();
 
   const {
@@ -14,8 +16,10 @@ export default function Signup() {
     formState: { errors },
   } = useForm()
   return (
+   <>
+   {userData && <Navigate to="/login" replace={true} ></Navigate>}
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      {userData ? <p>{userData.email}</p> : null}
+      {/* {userData ? <p>{userInfo.email}</p> : null} */}
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <Link to="/">
           <img
@@ -108,5 +112,6 @@ export default function Signup() {
         </div>
       </div>
     </div>
+   </>
   );
 }

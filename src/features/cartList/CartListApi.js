@@ -9,9 +9,9 @@ export function PostCart(cart) {
     resolve({ data })
   });
 }
-export function GetCart(id) {
+export function GetCart() {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/carts?userId=' + id)
+    const response = await fetch('http://localhost:8000/carts')
     const data = await response.json()
     resolve({ data })
   });
@@ -39,9 +39,9 @@ export function DeleteCart(id) {
   });
 }
 
-export function ClearCart(userid) {
+export function ClearCart() {
   return new Promise(async (resolve) => {
-    const response = await GetCart(userid)
+    const response = await GetCart()
     const data = await response.data
     for (let item of data) {
       await DeleteCart(item.id)

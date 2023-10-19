@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserOrderAsync, selectUserInfo, selectUserOrder } from '../userSlice';
+import { selectUser } from '../../auth/AuthSlice';
 
 export default function UserOrder() {
-  const userData = useSelector(selectUserInfo);
+  const userData = useSelector(selectUser);
+  const userInfo = useSelector(selectUserInfo);
   const dispatch = useDispatch();
   const userOrder = useSelector(selectUserOrder)
   console.log(userOrder)
   useEffect(() => {
-    dispatch(fetchUserOrderAsync(userData.id))
+    dispatch(fetchUserOrderAsync())
   }, [dispatch, userData])
 
   return (
@@ -26,8 +28,8 @@ export default function UserOrder() {
                   <h1 className="text-1xl my-1 font-bold tracking-tight text-orange-600">
                     Status: {product.status}
                   </h1>
-                  {userData.role === 'admin' && <h1 className="text-1xl my-1 font-bold tracking-tight text-orange-600">
-                    {userData.role}
+                  {userInfo.role === 'admin' && <h1 className="text-1xl my-1 font-bold tracking-tight text-orange-600">
+                    {userInfo.role}
                   </h1>}
                   <ul className='my-2'><span className='font-bold text-gray-800'>Shipping Address:</span>
                     <li className="text-slate-600 " >Street: {product.address.streetAddress}</li>

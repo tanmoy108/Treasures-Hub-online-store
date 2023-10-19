@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CartDeleteAsync, CartPatchAsync, selectCart } from './CartLIstSlice';
+import { CartDeleteAsync, CartPatchAsync, selectCart, selectCartAuth } from './CartLIstSlice';
 import { selectUser } from '../auth/AuthSlice';
 import { discountPrice } from '../../app/constant';
 import Model from '../../pages/Model';
 
 const CartBox = () => {
-  const [openModel,setOpenModel] = useState(null)
+  const [openModel, setOpenModel] = useState(null)
   const cartProducts = useSelector(selectCart)
   const userData = useSelector(selectUser);
+  const useCartAuth = useSelector(selectCartAuth)
   const dispatch = useDispatch();
 
   const HandleRemove = (e, id) => {
@@ -17,8 +18,8 @@ const CartBox = () => {
 
   return (
     <>
-      {cartProducts.length && <div className="flow-root">
-        <ul  className="-my-6 divide-y divide-gray-200">
+      {cartProducts.length && useCartAuth && <div className="flow-root">
+        <ul className="-my-6 divide-y divide-gray-200">
           {userData && cartProducts.map((item) => (
             <li key={item.id} className="flex py-6">
               <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -49,7 +50,8 @@ const CartBox = () => {
                       <select
                         value={item.quantity}
                         onChange={(e) => {
-                          dispatch(CartPatchAsync({ id:item.id, quantity: +e.target.value }))}}
+                          dispatch(CartPatchAsync({ id: item.id, quantity: +e.target.value }))
+                        }}
                         id="quantity"
                         name="quantity"
                         autoComplete="quantity-name"
@@ -63,10 +65,10 @@ const CartBox = () => {
                       </select>
                     </div>
                   </div>
-                  <Model Title={`Delete ${item.product.title}`} Message="Are you sure?" Delete="Delete" Cancel="Cancel" Action={(e) => HandleRemove(e, item.id)} CancelAction={()=>setOpenModel(null)} ShowModal={openModel === item.id} />
+                  <Model Title={`Delete ${item.product.title}`} Message="Are you sure?" Delete="Delete" Cancel="Cancel" Action={(e) => HandleRemove(e, item.id)} CancelAction={() => setOpenModel(null)} ShowModal={openModel === item.id} />
                   <div className="flex">
                     <button
-                      onClick={()=>setOpenModel(item.id)}
+                      onClick={() => setOpenModel(item.id)}
                       type="button"
                       className="font-medium text-indigo-600 hover:text-indigo-500"
                     >

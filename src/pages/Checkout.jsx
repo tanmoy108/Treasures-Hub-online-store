@@ -6,14 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCart } from '../features/cartList/CartLIstSlice';
 import { useForm } from "react-hook-form";
 import { PostOrderAsync, selectOrder } from '../features/order/orderSlice';
-import { patchUserAsync } from '../features/auth/AuthSlice';
+import { patchUserAsync, selectUser } from '../features/auth/AuthSlice';
 import { useState } from 'react';
 import { selectUserInfo } from '../features/user/userSlice';
 import { discountPrice } from '../app/constant';
 
 function Checkout() {
     const cartProducts = useSelector(selectCart)
-    const userData = useSelector(selectUserInfo);
+    const userData = useSelector(selectUser);
+    const userInfo = useSelector(selectUserInfo);
     const orderData = useSelector(selectOrder);
     const dispatch = useDispatch();
     const [selectAddress, setSelectAddress] = useState(null);
@@ -35,7 +36,6 @@ function Checkout() {
             {
                 products: cartProducts,
                 address: selectAddress,
-                userId: userData.id,
                 price: totalPrice,
                 quantity: totalQuantity,
                 method: payment,
@@ -48,13 +48,13 @@ function Checkout() {
     const onSubmit = (data) => {
         dispatch(patchUserAsync(
             {
-                ...userData,
-                address: [...userData.address, data]
+                ...userInfo,
+                address: [...userInfo.address, data]
             }))
         reset()
     }
     const HandleAddress = (index) => {
-        setSelectAddress(userData.address[index])
+        setSelectAddress(userInfo.address[index])
     }
     const HandlePayment = (e) => {
         setPayment(e.target.value)
@@ -126,7 +126,7 @@ function Checkout() {
                                                     <input
                                                         id="email"
                                                         {...register("email")}
-                                                        value={userData.email}
+                                                        value={userInfo.email}
                                                         type="email"
                                                         autoComplete="email"
                                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -232,7 +232,7 @@ function Checkout() {
                                             Choose from Existing addresses
                                         </p>
                                         <ul>
-                                            {userData.address.map((address, index) => (
+                                            {userInfo.address.map((address, index) => (
                                                 <li
                                                     key={index}
                                                     className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200"

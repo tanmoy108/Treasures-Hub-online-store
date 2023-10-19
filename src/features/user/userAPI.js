@@ -1,13 +1,13 @@
-export function fetchUserOrder(userId) {
+export function fetchUserOrder() {
   return new Promise(async (resolve) =>{
-    const response = await fetch(`http://localhost:8000/orders/user?userId=${userId}`) 
+    const response = await fetch(`http://localhost:8000/orders/user`) 
     const data = await response.json()
     resolve({data})
   });
 }
-export function fetchUserInfo(id) {
+export function fetchUserInfo() {
   return new Promise(async (resolve) =>{
-    const response = await fetch('http://localhost:8000/users/'+id) 
+    const response = await fetch('http://localhost:8000/users/info') 
     const data = await response.json()
     resolve({data})
   });
@@ -16,7 +16,7 @@ export function fetchUserInfo(id) {
 export function PatchUsers(userData) {
   return new Promise(async (resolve) => {
 
-    const response = await fetch('http://localhost:8000/users/' + userData.id,
+    const response = await fetch('http://localhost:8000/users/update',
       {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },

@@ -12,7 +12,7 @@ export function PostUsers(userData) {
     resolve({ data })
   });
 }
-export function CheckUsers(userData) {
+export function LoginUsers(userData) {
   return new Promise(async (resolve, reject) => {
     try {
       const response = await fetch('http://localhost:8000/auth/signin',
@@ -23,7 +23,24 @@ export function CheckUsers(userData) {
         })
       if (response.ok) {
         const data = await response.json()
-        resolve({ data })
+        resolve({data})
+      } else {
+        const err = await response.json()
+        reject(err)
+      }
+    } catch (error) {
+      reject(error)
+    }
+
+  });
+}
+export function CheckAuth() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch('http://localhost:8000/auth/check')
+      if (response.ok) {
+        const data = await response.json()
+        resolve({data})
       } else {
         const err = await response.json()
         reject(err)

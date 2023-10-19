@@ -62,7 +62,7 @@ export default function SpecificProduct() {
         const newItem = {
           quantity: 1,
           product: product.id,
-          user: userInfo.id,
+          // user: userInfo.id,
         }
         dispatch(CartPostAsync(newItem))
       }

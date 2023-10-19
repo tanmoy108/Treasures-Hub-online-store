@@ -8,15 +8,15 @@ const initialState = {
 };
 export const fetchUserOrderAsync = createAsyncThunk(
   'userInfo/fetchUserOrder',
-  async (userId) => {
-    const response = await fetchUserOrder(userId);
+  async () => {
+    const response = await fetchUserOrder();
     return response.data;
   }
 );
 export const fetchUserInfoAsync = createAsyncThunk(
   'userInfo/fetchUserInfo',
-  async (userId) => {
-    const response = await fetchUserInfo(userId);
+  async () => {
+    const response = await fetchUserInfo();
     return response.data;
   }
 );
@@ -58,6 +58,7 @@ export const userInfoSlice = createSlice({
       })
       .addCase(UpdateUserInfoAsync.fulfilled, (state, action) => {
         state.status = 'idle';
+        console.log(action.payload)
         state.userInfo= action.payload;
       })
   },

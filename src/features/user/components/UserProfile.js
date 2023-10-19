@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { UpdateUserInfoAsync, selectUserInfo } from '../userSlice';
 import { useForm } from "react-hook-form";
+import { selectUser } from '../../auth/AuthSlice';
 
 export default function UserProfile() {
   const [openForm, setOpenForm] = useState(-1)
   const [openAddForm, setOpenAddForm] = useState(false)
   const dispatch = useDispatch();
   const userInfo = useSelector(selectUserInfo)
+  const userData = useSelector(selectUser)
   const {
     register,
     handleSubmit,
@@ -38,26 +40,26 @@ export default function UserProfile() {
     updateAddress.address.splice(index, 1, data)
     dispatch(UpdateUserInfoAsync(updateAddress))
     setOpenForm(-1)
-    reset()
+    // reset()
 
   }
   const onAdd = (data) => {
     const updateAddress = { ...userInfo, address: [...userInfo.address, data] }
     dispatch(UpdateUserInfoAsync(updateAddress))
-    reset()
+    // reset()
     setOpenAddForm(false)
 
   }
   const HandleAddForm = () => {
     setOpenForm(-1);
     setOpenAddForm(true)
-    reset()
+    // reset()
     
   }
 
   return (
     <>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {userInfo && <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
 
           <div className="lg:col-span-5">
@@ -72,6 +74,9 @@ export default function UserProfile() {
                 <h1 className="text-2xl my-10 font-bold tracking-tight text-red-900">
                   {userInfo.email}
                 </h1>
+                <h1 className="text-2xl my-10 font-bold tracking-tight text-red-900">
+                  {userInfo.role}
+                </h1>
                 <button
                   onClick={() => HandleAddForm()}
                   type="button"
@@ -84,7 +89,9 @@ export default function UserProfile() {
                     <div className="border-b border-gray-900/10 pb-12">
                       <ul>
                         {openAddForm === true &&  <form noValidate onSubmit={handleSubmit((data) => {
+                              console.log(data)
                               onAdd(data)
+                              reset()
                             })} className="bg-white px-5 py-12 mt-12">
                               <div className="space-y-12">
                                 <div className="border-b border-gray-900/10 pb-12">
@@ -142,6 +149,7 @@ export default function UserProfile() {
                                           {...register("email")}
                                           type="email"
                                           autoComplete="email"
+                                          value={userInfo.email}
                                           className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                         />
                                       </div>
@@ -238,7 +246,7 @@ export default function UserProfile() {
                                 </div>
                               </div>
                             </form>}
-                        {userInfo.address && userInfo.address.map((address, index) => (
+                        {userData && userInfo.address.map((address, index) => (
                           <div key={index}>
                             {/* form start */}
                             {openForm === index && <form noValidate onSubmit={handleSubmit((data) => {
@@ -453,7 +461,7 @@ export default function UserProfile() {
           </div>
           {/* cart end */}
         </div>
-      </div>
+      </div>}
     </>
 
   );
