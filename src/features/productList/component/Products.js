@@ -28,7 +28,7 @@ export default function Products() {
           color="#4fa94d"
         /></div> : null}
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {productArray.map((product,index) => (
+          {productArray.length>0 && productArray.map((product,index) => (
             <div key={index}>
               <Link to={`/specificProduct/${product.id}`} >
                 <div key={product.id} className="group relative shadow-md p-2 rounded-md">

@@ -1,6 +1,6 @@
 export function fetchAllProduct() {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/products')
+    const response = await fetch('/products')
     const data = await response.json()
     resolve({ data })
   });
@@ -27,7 +27,7 @@ export function fetchFilterProduct(filterSelect, sortSelect, pagination,admin) {
   }
  
   return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:8000/products?` + str)
+    const response = await fetch(`/products?` + str)
     const data = await response.json()
     const totalitem = await response.headers.get('X-Total-Count')
     resolve({ data: { products: data, totalItems: +totalitem } })
@@ -36,28 +36,28 @@ export function fetchFilterProduct(filterSelect, sortSelect, pagination,admin) {
 
 export function fetchAllCategories() {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/categories')
+    const response = await fetch('/categories')
     const data = await response.json()
     resolve({ data })
   });
 }
 export function fetchAllBrands() {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/brands')
+    const response = await fetch('/brands')
     const data = await response.json()
     resolve({ data })
   });
 }
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/products/' + id)
+    const response = await fetch('/products/' + id)
     const data = await response.json()
     resolve({ data })
   });
 }
 export function postProduct(newData) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/products/',
+    const response = await fetch('/products/',
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -69,7 +69,7 @@ export function postProduct(newData) {
 }
 export function patchProduct(newData) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/products/'+newData.id,
+    const response = await fetch('/products/'+newData.id,
     {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },

@@ -1,6 +1,6 @@
 export function PostOrder(item) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/orders',
+    const response = await fetch('/orders',
       {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
@@ -16,7 +16,7 @@ export function GetOrder(pagination) {
     str += `${key}=${pagination[key]}&`
   }
   return new Promise(async (resolve) => {
-    const response = await fetch(`http://localhost:8000/orders?` + str)
+    const response = await fetch(`/orders?` + str)
     const data = await response.json()
     const totalOrder = await response.headers.get('X-Total-Count')
     resolve({ data: { orders: data, totalOrders: +totalOrder } })
@@ -24,7 +24,7 @@ export function GetOrder(pagination) {
 
   export function PatchOrder(order) {
     return new Promise(async (resolve) => {
-      const response = await fetch('http://localhost:8000/orders/'+order.id,
+      const response = await fetch('/orders/'+order.id,
         {
           method: "PATCH",
           headers: { 'Content-Type': 'application/json' },

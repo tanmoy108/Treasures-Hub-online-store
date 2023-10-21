@@ -1,7 +1,7 @@
 export function PostUsers(userData) {
   return new Promise(async (resolve) => {
 
-    const response = await fetch('http://localhost:8000/auth/signup',
+    const response = await fetch('/auth/signup',
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -15,7 +15,7 @@ export function PostUsers(userData) {
 export function LoginUsers(userData) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch('http://localhost:8000/auth/signin',
+      const response = await fetch('/auth/signin',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -37,7 +37,7 @@ export function LoginUsers(userData) {
 export function CheckAuth() {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch('http://localhost:8000/auth/check')
+      const response = await fetch('/auth/check')
       if (response.ok) {
         const data = await response.json()
         resolve({data})

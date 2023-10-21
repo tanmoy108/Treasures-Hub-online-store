@@ -1,6 +1,6 @@
 export function PostCart(cart) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/carts', {
+    const response = await fetch('/carts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(cart)
@@ -11,7 +11,7 @@ export function PostCart(cart) {
 }
 export function GetCart() {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/carts')
+    const response = await fetch('/carts')
     const data = await response.json()
     resolve({ data })
   });
@@ -19,7 +19,7 @@ export function GetCart() {
 
 export function PatchCart(item) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/carts/'+item.id, {
+    const response = await fetch('/carts/'+item.id, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(item)
@@ -30,7 +30,7 @@ export function PatchCart(item) {
 }
 export function DeleteCart(id) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8000/carts/'+id, {
+    const response = await fetch('/carts/'+id, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }
     })
