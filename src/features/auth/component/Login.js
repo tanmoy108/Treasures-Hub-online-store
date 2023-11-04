@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Navigate } from 'react-router-dom';
 import { selectUser, getUserAsync, selectError } from '../AuthSlice';
-
+import logo from '../../../assets/logo.png'
 
 export default function Login() {
   const userData = useSelector(selectUser);
@@ -21,8 +21,8 @@ export default function Login() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Link to="/">
             <img
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+              className="mx-auto h-auto w-24"
+              src={logo}
               alt="Your Company"
             />
           </Link>
@@ -53,11 +53,6 @@ export default function Login() {
                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                   Password
                 </label>
-                <div className="text-sm">
-                  <Link to="/forgotpassword" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </Link>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -86,7 +81,7 @@ export default function Login() {
           <div className="mt-10 text-center text-sm text-gray-500">
             Not a member?{' '}
             <Link to={"/signup"} className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              Crate Account
+              Create Account
             </Link>
           </div>
         </div>

@@ -90,7 +90,7 @@ function Checkout() {
                                                 <div className="mt-2">
                                                     <input
                                                         type="text"
-                                                        {...register("fullName")}
+                                                        {...register("fullName",{ required: "Name is required" })}
                                                         id="fullName"
                                                         autoComplete="fullName"
                                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -107,7 +107,7 @@ function Checkout() {
                                                 <div className="mt-2">
                                                     <input
                                                         type="tel"
-                                                        {...register("phone")}
+                                                        {...register("phone",{ required: "Phone is required" })}
                                                         id="phone"
                                                         autoComplete="phone"
                                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -144,7 +144,7 @@ function Checkout() {
                                                 <div className="mt-2">
                                                     <input
                                                         type="text"
-                                                        {...register("streetAddress")}
+                                                        {...register("streetAddress",{ required: "Address is required" })}
                                                         id="streetAddress"
                                                         autoComplete="streetAddress"
                                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -162,7 +162,7 @@ function Checkout() {
                                                 <div className="mt-2">
                                                     <input
                                                         type="text"
-                                                        {...register("city")}
+                                                        {...register("city",{ required: "City is required" })}
                                                         id="city"
                                                         autoComplete="address-level2"
                                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -180,7 +180,7 @@ function Checkout() {
                                                 <div className="mt-2">
                                                     <input
                                                         type="text"
-                                                        {...register("region")}
+                                                        {...register("region",{ required: "Region is required" })}
                                                         id="region"
                                                         autoComplete="address-level1"
                                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -198,7 +198,7 @@ function Checkout() {
                                                 <div className="mt-2">
                                                     <input
                                                         type="text"
-                                                        {...register("postalCode")}
+                                                        {...register("postalCode",{ required: "Postal code is required" })}
                                                         id="postalCode"
                                                         autoComplete="postalCode"
                                                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"

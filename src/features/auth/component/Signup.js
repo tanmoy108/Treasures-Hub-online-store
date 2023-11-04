@@ -4,6 +4,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { selectUser, userAsync } from '../AuthSlice';
 import { useForm, SubmitHandler } from "react-hook-form"
 import { selectUserInfo } from '../../user/userSlice';
+import logo from "../../../assets/logo.png"
 
 export default function Signup() {
   const userData = useSelector(selectUser);
@@ -22,11 +23,11 @@ export default function Signup() {
       {/* {userData ? <p>{userInfo.email}</p> : null} */}
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <Link to="/">
-          <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
+            <img
+              className="mx-auto h-auto w-24"
+              src={logo}
+              alt="Your Company"
+            />
         </Link>
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Create New Account

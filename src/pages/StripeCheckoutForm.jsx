@@ -60,7 +60,8 @@ export default function StripeCheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `treasures-hub-online-store-backend.vercel.app/order/${orderData.id}`,
+        return_url: `treasuresHub.vercel.app/order/${orderData.id}`,
+        // return_url: `treasures-hub-online-store-backend.vercel.app/order/${orderData.id}`,
       },
     });
     if (error.type === "card_error" || error.type === "validation_error") {
